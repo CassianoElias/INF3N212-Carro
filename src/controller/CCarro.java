@@ -52,7 +52,7 @@ public class CCarro {
       c1.setCor("prata");
       c1.setProprietario(cadPessoa.getPessoaCPF("27769049083"));
       addCarro (c1);
-      Carro c2 = new Carro ();
+      Carro c2 = new Carro();
       c2.setPlaca("GTX1050ti");
       c2.setAnoFab(2023);
       c2.setAnoMod(2023);

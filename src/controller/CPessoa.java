@@ -56,7 +56,7 @@ public class CPessoa {
                
            }
        }//fim do foreach
-       return null;
+       return p;
    } 
    
    public void mockPessoas(){
