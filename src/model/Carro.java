@@ -9,6 +9,7 @@ package model;
  * @author 201401665
  */
 public class Carro {
+    private String placa;
     private String marca;
     private String modelo;
     private int anoFab;
@@ -21,7 +22,8 @@ public class Carro {
     public Carro() {
     }
 
-    public Carro(String marca, String modelo, int anoFab, int anoMod, String cor, String tpCambio, String combustivel, Pessoa proprietario) {
+    public Carro(String placa, String marca, String modelo, int anoFab, int anoMod, String cor, String tpCambio, String combustivel, Pessoa proprietario) {
+        this.placa = placa;
         this.marca = marca;
         this.modelo = modelo;
         this.anoFab = anoFab;
@@ -32,6 +34,15 @@ public class Carro {
         this.proprietario = proprietario;
     }
 
+    public String getPlaca() {
+        return placa;
+    }
+
+    public void setPlaca(String placa) {
+        this.placa = placa;
+    }
+
+    
     public String getMarca() {
         return marca;
     }
@@ -98,8 +109,7 @@ public class Carro {
 
     @Override
     public String toString() {
-        return "\n---" + "\nmarca:\t" + marca + "\nmodelo:\t" + modelo + "\nanoFab:\t" + anoFab + "\nanoMod:\t" + anoMod + "\ncor:\t" + cor + "\ntpCambio:\t" + tpCambio + "\ncombustivel:\t" + combustivel + "\nproprietario:\t" + proprietario.getNome();
+        return "\n---" + "\nplaca:\t" + placa + "\nmarca:\t" + marca + "\nmodelo:\t" + modelo + "\nanoFab:\t" + anoFab + "\nanoMod:\t" + anoMod + "\ncor:\t" + cor + "\ntpCambio:\t" + tpCambio + "\ncombustivel:\t" + combustivel + "\nproprietario:\t" + proprietario.getNome();
     }
-    
     
 }// Fim Classe Carro
