@@ -6,8 +6,12 @@ package inf3n212.carro;
 
 import controller.CCarro;
 import controller.CPessoa;
+import java.awt.BorderLayout;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import model.Carro;
+import model.Pessoa;
+import util.Validadores;
 
 /**
  *
@@ -40,7 +44,6 @@ public class INF3N212Carro {
                 opSM = leiaNumInt();
                 switch (opSM) {
                 case 1:
-                    System.out.println(" -- Cadastrar -- ");
                     if (opM == 1) {
                         cadastraPessoa();
                     }else{
@@ -56,7 +59,6 @@ public class INF3N212Carro {
                     }
                     break;
                 case 3:
-                    System.out.println(" -- Listar -- ");
                     if (opM == 1) {
                         listarPessoa();
                     }else{
@@ -128,7 +130,53 @@ public class INF3N212Carro {
     }//fim subMenu
 
     private static void cadastraPessoa() {
-        System.out.println("Cadastre a Pessoa");
+        System.out.println("-- Cadastre a Pessoa --");  
+        int idPessoa;
+        String nome;
+        String cpf;
+        String endereco;
+        String telefone;
+        boolean tcpf = true;
+        
+        do {            
+            System.out.print("Informe o CPF> ");
+            cpf = leia.nextLine();
+            tcpf = Validadores.isCPF(cpf);
+            if (tcpf) {
+                if(cadPessoa.getPessoaCPF(cpf)!=null){
+                    System.out.println("CPF ja esta cadastrado!");
+                    System.out.println("1 - Tentar novamente");
+                    System.out.println("2 - Cancelar cadastramento");
+                    System.out.println("Digite Aqui: ");
+                    int op = leiaNumInt();
+                    if (op==2){
+                        return;
+                    }
+                }else{
+                    tcpf = false;
+                }
+            }else{
+                System.out.println("CPF Invalido!");
+                System.out.println("1 - Tentar novamente");
+                    System.out.println("2 - Cancelar cadastramento");
+                    System.out.println("Digite Aqui: ");
+                    int op = leiaNumInt();
+                    if (op==2){
+                        return;
+                    }
+                tcpf = true;
+            }
+        } while (tcpf);
+        System.out.print("Inform o nome: ");
+        nome = leia.nextLine();
+        System.out.print("Inform o endereço: ");
+        endereco = leia.nextLine();
+        System.out.print("Inform o telefone: ");
+        telefone = leia.nextLine();
+        idPessoa = cadPessoa.geraID();
+        Pessoa p = new Pessoa(idPessoa, nome, cpf, endereco, telefone);
+        cadPessoa.addPessoa(p);
+        System.out.println(p.getNome() + " cadastrado(a) com sucesso");
     }
 
     private static void cadastrarCarro() {
@@ -144,11 +192,18 @@ public class INF3N212Carro {
     }
         
     private static void listarPessoa() {
-        System.out.println("Listar");
+        System.out.println("-- Lista de Pessoas --");
+        for (Pessoa pessoa : cadPessoa.getPessoa()){
+            System.out.println(pessoa.toString());
+        }
     }
 
     private static void listarCarro() {
-        System.out.println("Listar");
+        System.out.println("-- Lista de Carros --");
+        for (Carro carro : cadCarro.getCarros()){
+            System.out.println(carro.toString());
+        }
+            
     }
 
     private static void deletarPessoa() {
