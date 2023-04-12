@@ -345,82 +345,74 @@ public class INF3N212Carro {
                     System.out.println("5 - Todos");
                     System.out.println("0 - Cancelar");
                     System.out.print("Digite Aqui: ");
-                    int op = leiaNumInt();
+                     int op = leiaNumInt();
                     if (op == 1 || op == 5) {
-                        System.out.println("Informe a nova cor: ");
+                        System.out.print("Informe a nova cor: ");
                         c.setCor(leia.nextLine().toUpperCase());
-                        if (op == 2 || op == 5) {
-                            System.out.println("Informe o novo tipo de cambio: ");
-                            c.setTpCambio(leia.nextLine().toUpperCase());
-                            if (op == 3 || op == 5) {
-                                System.out.println("Informe novo tipo de combustivel: ");
-                                c.setCombustivel(leia.nextLine().toUpperCase());
-                                if (op == 4 || op == 5) {
-                                    boolean isCPF;
-                                    do {
-                                        System.out.println("Informe novo proprietario: ");
-                                        String cpf = leia.nextLine();
-                                        isCPF = Validadores.isCPF(cpf);
-                                        if (isCPF) {
-                                            Pessoa p = cadPessoa.getPessoaCPF(cpf);
-                                            if (p != null) {
-                                                System.out.println("Pessoa selecionada: " + p.getNome());
-                                                System.out.println("Esta Correto?");
-                                                System.out.println("1 - SIM | 2 - NÂO");
-                                                System.out.print("Digite Aqui: ");
-                                                op = leiaNumInt();
-                                                if (op == 1) {
-                                                    isCPF = false;
-                                                    c.setProprietario(p);
-                                                }
-                                            } else {
-                                                System.out.println("CPF não encontrado!");
-                                                System.out.println("Deseja cadastra esse CPF?");
-                                                System.out.println("1 - Cadastrar?");
-                                                System.out.println("2 - Tentar Novamente?");
-                                                System.out.print("Digite aqui: ");
-                                                int op2 = leiaNumInt();
-                                                if (op2 == 1) {
-                                                    cadastraPessoa();
-                                                }
-                                            }
-                                        } else {
-                                            System.out.println("CPF invalido, tente novamente");
-                                            isCPF = true;
-                                        }
-                                    } while (isCPF);
-                                }
-                            }
-
-                            if (op < 0 || op > 5) {
-                                System.out.println("Opção Inavalida!");
-
-                                if (op == 0) {
-                                    System.out.println("Edição cancelada pelo usuario");
-                                    isPlaca = false;
-
-                                }
-                                isPlaca = false;
-                            }
-
-                        } else {
-                            System.out.println("Placa nao cadastrada!");
-                            isPlaca = true;
-
-                        }
                     }
+                    if (op == 2 || op == 5) {
+                        System.out.print("Informe o novo câmbio: ");
+                        c.setTpCambio(leia.nextLine().toUpperCase());
+                    }
+                    if (op == 3 || op == 5) {
+                        System.out.print("Informe o novo combustível: ");
+                        c.setCombustivel(leia.nextLine().toUpperCase());
+                    }
+                    if (op == 4 || op == 5) {
+                        boolean isCPF;
+                        do {
+                                        System.out.print("Informe o CPF proprietário: ");
+                            String cpf = leia.nextLine();
+                            isCPF = Validadores.isCPF(cpf);
+                            if (isCPF) {
+                                Pessoa p = cadPessoa.getPessoaCPF(cpf);
+                                if (p != null) {
+                                    System.out.println("Pessoa selecionada: " + p.getNome());
+                                    System.out.println("Está correto?");
+                                    System.out.println("1 - Sim | 2 - Não");
+                                    System.out.print("Digite aqui: ");
+                                    op = leiaNumInt();
+                                    if (op == 1) {
+                                        isCPF = false;
+                                        c.setProprietario(p);
+                                    }
+                                } else {
+                                    System.out.println("CPF não encontrado!");
+                                    System.out.println("1 - Cadastrar?");
+                                    System.out.println("2 - Tentar novamente?");
+                                    System.out.print("Digite aqui sua opção: ");
+                                    int op2 = leiaNumInt();
+                                    if (op2 == 1) {
+                                        cadastraPessoa();
+                                    }
+                                }
+                            }else{
+                                System.out.println("CPF inválido, tente novamente!");
+                                isCPF = true;
+                            }
+                        } while (isCPF);
+                    }
+                    if (op == 0) {
+                        System.out.println("Edição do carro cancelada pelo usuário!");
+                        isPlaca = false;
+                    }
+                    if (op < 0 || op > 5) {
+                        System.out.println("Opção inválida!");
+                    }
+                    isPlaca = false;
                 } else {
-                    System.out.println("Placa informa invalida!");
-                    System.out.println("Desena tentar novamentwe?");
-                    System.out.println("1 - Sim | 2 - Cancelar");
-                    System.out.print("Digite Aqui: ");
-                    int op = leiaNumInt();
-                    if (op == 1) {
-                        isPlaca = true;
-                    }
-
+                    System.out.println("Placa não cadastrada!");
+                    isPlaca = true;
                 }
-
+            } else {
+                System.out.println("Placa informada inválida!");
+                System.out.println("Deseja tentar novamente?");
+                System.out.println("1 - Sim | 2 - Cancelar");
+                System.out.print("Digite aqui: ");
+                int op = leiaNumInt();
+                if (op == 1) {
+                    isPlaca = true;
+                }
             }
         } while (isPlaca);
     }//fim método
